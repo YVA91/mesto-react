@@ -10,17 +10,17 @@ function Main(props) {
 
   React.useEffect(() => {
   Promise.all([api.getUserInfo(), api.getCreateCard()])
-      .then(([data, cards]) => {
-        setUserName(data.name);
-        setUserDescription(data.about);
-        setUserAvatar(data.avatar);
-        setCards(cards)
-      })
-      .catch((err) => {
-        console.log(err);
-      })
+    .then(([data, cards]) => {
+      setUserName(data.name);
+      setUserDescription(data.about);
+      setUserAvatar(data.avatar);
+      setCards(cards)
+    })
+    .catch((err) => {
+      console.log(err);
+    })
   }, [])
-
+  
   return (
     <main className="content">
       <section className="profile">
@@ -45,12 +45,12 @@ function Main(props) {
               <Card
                 key={card._id}
                 card={card}
+                onCardClick={props.onCardClick}
               />)
             })
           }
         </ul>
       </section>
-
 
       <section className="popup popup_open-photo ">
         <figure className="popup__figure">
@@ -61,8 +61,6 @@ function Main(props) {
           </figcaption>
         </figure>
       </section>
-
-
 
       <section className="popup popup_confirm">
         <div className="popup__container">
