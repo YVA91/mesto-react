@@ -47,7 +47,6 @@ function App() {
     setIsAddPlacePopupOpen (false)
     setIsEditAvatarPopupOpen (false)
     setSelectedCard({})
-    
   }
 
   function handleUpdateUser(data) {
@@ -71,7 +70,6 @@ function App() {
         console.log(err)
       })
   }
-
 
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
@@ -105,7 +103,6 @@ function App() {
     })
 }
 
-
   return (
     < CurrentUserContext.Provider value={currentUser} >
       <Header/> 
@@ -116,13 +113,12 @@ function App() {
         onCardClick={handleCardClick}
         onCardLike={handleCardLike}
         onCardDelete={handleCardDelete}
-        cards={cards}
-      />
+        cards={cards}/>
 
       <EditProfilePopup
-      isOpen={isEditProfilePopupOpen}
-      onClose={closeAllPopups}
-      onUpdateUser={handleUpdateUser}> 
+        isOpen={isEditProfilePopupOpen}
+        onClose={closeAllPopups}
+        onUpdateUser={handleUpdateUser}> 
       </EditProfilePopup> 
 
       <EditAvatarPopup
@@ -137,7 +133,6 @@ function App() {
         onAddPlace={handleAddPlaceSubmit}>
       </AddPlacePopup>
 
-  
       <PopupWithForm
         name = "confirm"
         onClose = {closeAllPopups}
@@ -147,12 +142,11 @@ function App() {
 
       <ImagePopup
         onClose = {closeAllPopups}
-        card = {selectedCard}
-      />
+        card = {selectedCard}/>
 
-     <Footer/>
+      <Footer/>
     </CurrentUserContext.Provider>
   );
-  }
+}
 
 export default App;

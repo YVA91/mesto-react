@@ -1,7 +1,6 @@
-
 function ImagePopup(props) {
   return (
-    <section className={`popup popup_open-photo ${props.card.link ? 'popup_opened' : ''}`}>
+    <section className={`popup popup_open-photo ${props.card.link && 'popup_opened'}`}>
       <figure className="popup__figure">
         <button 
           className="popup__close popup__close_img" 
@@ -22,4 +21,5 @@ function ImagePopup(props) {
     );
   }
   
-  export default ImagePopup;
+export default ImagePopup;
+  
