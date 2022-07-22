@@ -1,6 +1,23 @@
-function Card({ card, onCardClick }) {
+import {useContext} from 'react';
+import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
+
+function Card({ card, onCardClick, onCardLike, onCardDelete }) {
+  const currentUser = useContext(CurrentUserContext);
+  const isOwn = card.owner._id === currentUser._id;
+  const cardDeleteButtonClassName = (`photo__remove ${isOwn ? '' : 'photo__remove_inactive'}`);
+  const isLiked = card.likes.some(i => i._id === currentUser._id);
+  const cardLikeButtonClassName = (`photo__item-like ${isLiked ? 'photo__item-like_actve' : ''}`);;
+
   function handleClick() {
     onCardClick(card);
+  }  
+
+  function handleLikeClick() {
+    onCardLike(card);
+  }  
+
+  function handleCardDelete() {
+    onCardDelete(card);
   }  
 
   return (
@@ -10,11 +27,11 @@ function Card({ card, onCardClick }) {
         alt={card.name} 
         onClick={handleClick}
       />
-      <button className="photo__remove" type="button" aria-label="удалить фото"></button>
+      <button className={cardDeleteButtonClassName} type="button" aria-label="удалить фото" onClick={handleCardDelete}></button>
       <div className="photo__item-signature">
         <h2 className="photo__item-title">{card.name}</h2>
         <div className="photo__likes-conteiner">
-          <button className="photo__item-like" type="button" aria-label="лайк"></button>
+          <button className={cardLikeButtonClassName} type="button" aria-label="лайк" onClick={handleLikeClick}></button>
           <p className="photo__likes-counter">{card.likes.length}</p>
         </div>
       </div>

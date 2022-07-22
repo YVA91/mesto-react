@@ -1,5 +1,3 @@
-
-
 class Api {
   constructor(url, token) {
     this._url = url;
@@ -22,7 +20,6 @@ class Api {
       .then(this._report)
   }
 
-
   getCreateCard() {
     return fetch(`${this._url}/cards`, {
       headers: {
@@ -32,12 +29,38 @@ class Api {
       .then(this._report)
   }
 
+  putLike(cardsId) {
+    return fetch(`${this._url}/cards/${cardsId}/likes`, {
+      method: 'PUT',
+      headers: {
+        authorization: this._token
+      }
+    })
+      .then(this._report)
+  }
 
+  deleteLike(cardsId) {
+    return fetch(`${this._url}/cards/${cardsId}/likes`, {
+      method: 'DELETE',
+      headers: {
+        authorization: this._token
+      }
+    })
+      .then(this._report)
+  }
 
+  deletePhoto(dataid) {
+    return fetch(`${this._url}/cards/${dataid}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: this._token
+      }
+    })
+      .then(this._report)
+  }
 
-
-  patchUserInfo(userInfoUrl, name, job) {
-    return fetch(`${this._url}/${userInfoUrl}`, {
+  patchUserInfo(name, job) {
+    return fetch(`${this._url}/users/me`, {
       method: 'PATCH',
       headers: {
         authorization: this._token,
@@ -51,11 +74,8 @@ class Api {
       .then(this._report)
   }
 
-
-
-
-  patchUserAvatar(serverAvtaarUrl, avatar) {
-    return fetch(`${this._url}/${serverAvtaarUrl}`, {
+  patchUserAvatar(avatar) {
+    return fetch(`${this._url}/users/me/avatar `, {
       method: 'PATCH',
       headers: {
         authorization: this._token,
@@ -68,8 +88,8 @@ class Api {
       .then(this._report)
   }
 
-  postNewPhoto(serverNewCard, name, link) {
-    return fetch(`${this._url}/${serverNewCard}`, {
+  postNewPhoto(name, link) {
+    return fetch(`${this._url}/cards `, {
      method: 'POST',
      headers: {
        authorization: this._token,
@@ -80,36 +100,6 @@ class Api {
        link: link
      })
    })
-      .then(this._report)
-  }
-
-  deletePhoto(deleteCard, dataid) {
-    return fetch(`${this._url}/${deleteCard}/${dataid}`, {
-      method: 'DELETE',
-      headers: {
-        authorization: this._token
-      }
-    })
-      .then(this._report)
-  }
-
-  putLike(cards, cardsId, likes) {
-    return fetch(`${this._url}/${cards}/${cardsId}/${likes}`, {
-      method: 'PUT',
-      headers: {
-        authorization: this._token
-      }
-    })
-      .then(this._report)
-  }
-
-  deleteLike(cards, cardsId, likes) {
-    return fetch(`${this._url}/${cards}/${cardsId}/${likes}`, {
-      method: 'DELETE',
-      headers: {
-        authorization: this._token
-      }
-    })
       .then(this._report)
   }
 }
